@@ -6,13 +6,16 @@ function App() {
 	return (
 		<div className='App'>
 			<h1>Buttons</h1>
-			<Button>Hello World!</Button>
-			<RoundButton />
-			<AddButton />
-			<br />
-			<span>----</span>
-			<Checkbox />
-			<TextInputMain />
+			<div>
+				<Button>Hello World!</Button>
+				<RoundButton />
+				<AddButton />
+			</div>
+			<div>
+				<span>----</span>
+				<Checkbox />
+				<TextInputMain />
+			</div>
 		</div>
 	);
 }
