@@ -9,6 +9,7 @@ function App() {
 			<Button>Hello World!</Button>
 			<RoundButton />
 			<AddButton />
+			<br />
 			<span>----</span>
 			<Checkbox />
 			<TextInputMain />
