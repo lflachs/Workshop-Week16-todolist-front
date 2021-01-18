@@ -2,35 +2,33 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-    provider = "mysql"
+    provider = "postgresql"
     url      = env("DATABASE_URL")
 }
 
 model User {
-    id        Int        @id @default(autoincrement())
-    email     String     @unique
-    name      String
-    todolists Todolist[]
+    id       Int        @id @default(autoincrement())
+    email    String     @unique
+    password String
+    Todolist Todolist[]
 }
 
 model Todolist {
-    id            Int            @id @default(autoincrement())
-    title         String
-    user          User?          @relation(fields: [userId], references: [id])
-    userId        Int?
-    todolistItems TodolistItem[]
+    id     Int    @id @default(autoincrement())
+    title  String
+    task   Task[]
+    user   User?  @relation(fields: [userId], references: [id])
+    userId Int?
 }
 
-model TodolistItem {
+model Task {
     id         Int       @id @default(autoincrement())
     title      String
-    done       Boolean   @default(false)
+    done       Boolean
     todolist   Todolist? @relation(fields: [todolistId], references: [id])
     todolistId Int?
 }
 
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["uncheckedScalarInputs"]
-
+    provider = "prisma-client-js"
 }
