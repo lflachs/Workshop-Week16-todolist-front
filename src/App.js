@@ -1,6 +1,6 @@
-import { Checkbox, TextInputMain } from './components/input';
+import { Checkbox, TextInputMain } from './components/Inputs';
 
-const { Button, AddButton, RoundButton } = require('./components/button');
+const { Button, AddButton, RoundButton } = require('./components/Buttons');
 
 function App() {
 	return (
