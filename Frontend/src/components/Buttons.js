@@ -15,6 +15,9 @@ export const RoundButton = styled(Button)`
 	height: 72px;
 	font-size: ${defaultTheme.fontScale.h2};
 	font-weight: 100;
+	&:focus {
+		outline: none;
+	}
 `;
 
 export const AddButton = ({ ...props }) => (

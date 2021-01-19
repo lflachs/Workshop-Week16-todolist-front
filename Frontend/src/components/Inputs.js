@@ -60,8 +60,6 @@ const TextInput = styled.input.attrs({ type: 'text' })`
 	color: grey;
 	border: none;
 	border-radius: 40px;
-	padding: 10px;
-	box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.12);
 `;
 
 export const TextInputMain = ({
