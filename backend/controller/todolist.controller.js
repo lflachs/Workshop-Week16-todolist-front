@@ -12,7 +12,9 @@ const findTask = async (id) => {
 };
 exports.getAllTodolist = async (req, res, next) => {
 	try {
-		const todolists = await client.todolist.findMany({});
+		const todolists = await client.todolist.findMany({
+			where: { id: req.userId },
+		});
 		res.status(200).json(todolists);
 	} catch (err) {
 		next(err);
@@ -45,7 +47,7 @@ exports.createTodolist = async (req, res, next) => {
 	try {
 		const title = req.body.title;
 		const createdTodolist = await client.todolist.create({
-			data: { title: title },
+			data: { title: title, user: { connect: { id: req.userId } } },
 		});
 		res.status(200).json(createdTodolist);
 	} catch (err) {

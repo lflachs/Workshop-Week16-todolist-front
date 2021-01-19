@@ -23,7 +23,7 @@
 		"morgan": "^1.10.0"
 	},
 	"devDependencies": {
-		"@prisma/cli": "^2.13.1",
+		"@prisma/cli": "^2.14.0",
 		"nodemon": "^2.0.6"
 	}
 }

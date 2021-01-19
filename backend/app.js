@@ -3,6 +3,7 @@ const app = express();
 const mainRouter = require('./routes');
 const cookieParser = require('cookie-parser');
 const errorMiddleware = require('./middleware/error-handling.middleware');
+const authMiddleware = require('./middleware/auth.middleware.js');
 const db = require('./config/db');
 const morgan = require('morgan');
 const cors = require('cors');

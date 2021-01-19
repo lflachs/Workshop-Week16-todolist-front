@@ -19,5 +19,6 @@
 	"bugs": {
 		"url": "https://github.com/lflachs/Workshop-Week16-todolist-front/issues"
 	},
-	"homepage": "https://github.com/lflachs/Workshop-Week16-todolist-front#readme"
+	"homepage": "https://github.com/lflachs/Workshop-Week16-todolist-front#readme",
+	"dependencies": {}
 }

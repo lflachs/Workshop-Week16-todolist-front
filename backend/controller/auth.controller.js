@@ -15,6 +15,7 @@ exports.register = async (req, res, next) => {
 			throw createError(422, 'User already registered');
 		}
 		const hashedPassword = await bcrypt.hash(password, 12);
+
 		const newUser = await client.user.create({
 			data: {
 				email,

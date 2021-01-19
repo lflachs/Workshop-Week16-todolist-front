@@ -2,6 +2,7 @@ const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
+	// req.headers, req.body, req.userId
 	if (!req.cookies?.token) {
 		throw createError(401);
 	}
