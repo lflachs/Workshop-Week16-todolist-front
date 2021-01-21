@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const mainRouter = require('./routes');
 const cookieParser = require('cookie-parser');
 const errorMiddleware = require('./middleware/error-handling.middleware');
@@ -13,14 +14,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(morgan());
-const user = {
-	email: 'bob@gmail.com',
-	password: 12345,
-};
+// const user = {
+// 	email: 'bob@gmail.com',
+// 	password: 12345,
+// };
 
 app.use('/api', mainRouter);
 
-app.post('/register', (req, res, next) => {});
+// app.post('/register', (req, res, next) => {});
 
 app.post('/login', (req, res, next) => {
 	const { email, password } = req.body;
@@ -44,7 +45,11 @@ const authenticationMiddleware = (req, res, next) => {
 app.get('/secret', authenticationMiddleware, (req, res, next) => {
 	res.status(200).json({ message: 'You found the seret!' });
 });
+app.use(express.static(path.join(__dirname, 'build')));
 
+app.get('/*', function (req, res) {
+	res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 app.use('*', (req, res, next) => {
 	const error = new Error('Not found');
 	error.status = 404;

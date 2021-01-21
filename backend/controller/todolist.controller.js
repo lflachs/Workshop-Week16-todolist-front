@@ -11,10 +11,12 @@ const findTask = async (id) => {
 	return task;
 };
 exports.getAllTodolist = async (req, res, next) => {
+	console.log(req.userId);
 	try {
 		const todolists = await client.todolist.findMany({
-			where: { id: req.userId },
+			where: { userId: req.userId },
 		});
+		console.log(todolists);
 		res.status(200).json(todolists);
 	} catch (err) {
 		next(err);
