@@ -17,7 +17,7 @@ function App() {
 
 				<Router>
 					<Switch>
-						<Route path='/dashboard' exact component={Todolist} />
+						<Route path='/' exact component={Todolist} />
 						<Route path='/login' exact component={Login} />
 						<Route path='/register' exact component={Register} />
 					</Switch>

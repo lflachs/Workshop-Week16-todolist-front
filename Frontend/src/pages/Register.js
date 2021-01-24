@@ -11,7 +11,7 @@ export default function Register() {
 		if (repeatPassword !== password) {
 			setError('password should match');
 		}
-		fetch(`${process.env.REACT_APP_API_URL}/auth/register`, {
+		fetch(`/api/auth/register`, {
 			method: 'POST',
 			headers: { 'content-type': 'application/json' },
 			body: JSON.stringify({ email, password }),

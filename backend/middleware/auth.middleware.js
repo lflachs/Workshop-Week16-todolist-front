@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
 	// req.headers, req.body, req.userId
-	if (!req.cookies?.token) {
+	if (!req.cookies.token) {
 		throw createError(401);
 	}
 	jwt.verify(req.cookies.token, process.env.JWT_SECRET, (err, decoded) => {

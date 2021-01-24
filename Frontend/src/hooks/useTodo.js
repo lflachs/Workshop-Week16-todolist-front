@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import useAsyncError from './useAsyncError';
 
-const API_URL = process.env.REACT_APP_API_URL;
-console.log('api', API_URL);
 export default function useTodo() {
 	const [error, setError] = useState('');
 	const [todolists, setTodolists] = useState([]);
@@ -17,7 +15,7 @@ export default function useTodo() {
 			});
 	}, []);
 	const fetchApi = (path, method, body) => {
-		return fetch(`${API_URL}${path}`, {
+		return fetch(`/api${path}`, {
 			method,
 			headers: { 'content-type': 'application/json' },
 			body: JSON.stringify(body),

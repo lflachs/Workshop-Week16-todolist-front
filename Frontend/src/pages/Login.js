@@ -11,7 +11,7 @@ export default function Login() {
 	const handleLogin = (e) => {
 		e.preventDefault();
 		console.log('login function');
-		fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
+		fetch(`/api/auth/login`, {
 			method: 'POST',
 			headers: { 'content-type': 'application/json' },
 			body: JSON.stringify({ email, password }),
