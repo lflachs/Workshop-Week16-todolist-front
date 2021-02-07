@@ -4,9 +4,21 @@ import Login from './pages/Login';
 import ErrorBoundary from './pages/ErrorBoundary';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Register from './pages/Register';
+import { useEffect, useState } from 'react';
+import ProtectedRoute from './components/ProtectedRoute';
 const { Button, AddButton, RoundButton } = require('./components/Buttons');
 
 function App() {
+	const [loggedIn, setLoggedIn] = useState(false);
+	useEffect(() => {
+		fetch('/api/user/current').then((resp) => {
+			if (!resp.ok) {
+				setLoggedIn(false);
+			} else {
+				setLoggedIn(true);
+			}
+		});
+	}, []);
 	return (
 		<div className='App'>
 			<ErrorBoundary>
@@ -17,7 +29,12 @@ function App() {
 
 				<Router>
 					<Switch>
-						<Route path='/' exact component={Todolist} />
+						<ProtectedRoute
+							path='/'
+							exact
+							component={Todolist}
+							user={loggedIn}
+						/>
 						<Route path='/login' exact component={Login} />
 						<Route path='/register' exact component={Register} />
 					</Switch>
