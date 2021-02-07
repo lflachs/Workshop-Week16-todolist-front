@@ -55,7 +55,7 @@ const CheckboxContainer = styled.div`
 	vertical-align: middle;
 `;
 
-const TextInput = styled.input.attrs({ type: 'text' })`
+export const TextInput = styled.input.attrs({ type: 'text' })`
 	width: 90%;
 	color: grey;
 	border: none;
@@ -71,7 +71,9 @@ export const TextInputMain = ({
 	const [userInput, setUserInput] = useInputState(initialValue);
 	// console.log(inputRef);
 	return !editable ? (
-		<p style={{ width: '90%', cursor: 'pointer' }}>{userInput}</p>
+		<p {...props} style={{ width: '90%', cursor: 'pointer' }}>
+			{userInput}
+		</p>
 	) : (
 		<TextInput
 			ref={inputRef}

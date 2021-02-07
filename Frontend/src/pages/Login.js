@@ -1,32 +1,20 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import useAsyncError from '../hooks/useAsyncError';
+import useAuth from '../hooks/useAuth';
+import { userContext } from '../context/userContext';
 
 export default function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const throwError = useAsyncError();
+	const { login, error } = useContext(userContext);
 
-	const history = useHistory();
-	const handleLogin = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log('login function');
-		fetch(`/api/auth/login`, {
-			method: 'POST',
-			headers: { 'content-type': 'application/json' },
-			body: JSON.stringify({ email, password }),
-		}).then((resp) => {
-			if (!resp.ok) {
-				resp.json().then((json) => {
-					const error = new Error(json.message);
-					error.status = resp.status;
-					throwError(error);
-				});
-			} else {
-				history.push('/dashboard');
-			}
-		});
+		login({ email, password });
 	};
+
 	return (
 		<div
 			style={{
@@ -36,7 +24,8 @@ export default function Login() {
 			}}
 		>
 			<h1>Login</h1>
-			<form onSubmit={handleLogin}>
+			{error && <p style={{ color: 'redd' }}>{error}</p>}
+			<form onSubmit={handleSubmit}>
 				<label htmlFor='email'>Email: </label>
 				<input
 					type='email'

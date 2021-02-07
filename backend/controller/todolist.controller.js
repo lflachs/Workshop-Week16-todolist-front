@@ -45,6 +45,19 @@ exports.getTodolist = async (req, res, next) => {
 	}
 };
 
+exports.getTodolistTasks = async (req, res, next) => {
+	try {
+		const todolistId = Number(req.params.todolistId);
+		const tasks = await client.todolist
+			.findUnique({
+				where: { id: todolistId },
+			})
+			.task();
+		res.status(200).json(tasks);
+	} catch (err) {
+		next(err);
+	}
+};
 exports.createTodolist = async (req, res, next) => {
 	try {
 		const title = req.body.title;
@@ -60,10 +73,11 @@ exports.createTodolist = async (req, res, next) => {
 exports.updateTodolist = async (req, res, next) => {
 	try {
 		const todolistId = req.params.todolistId;
-		const newTitle = req.body.title;
+		const { title } = req.body;
+
 		const updatedTodolist = await client.todolist.update({
 			where: { id: todolistId },
-			data: { title: newTitle },
+			data: { title },
 		});
 		res.status(200).json(updatedTodolist);
 	} catch (err) {
@@ -111,11 +125,11 @@ exports.updateTask = async (req, res, next) => {
 		}
 
 		const taskId = Number(req.params.taskId);
-		const newTitle = req.body.title;
+		const { title, description, picture } = req.body;
 		const newDone = req.body.done;
 		const updatedTask = await client.task.update({
 			where: { id: taskId },
-			data: { title: newTitle, done: newDone },
+			data: { title, description, picture, done: newDone },
 		});
 		res.status(200).json(updatedTask);
 	} catch (err) {

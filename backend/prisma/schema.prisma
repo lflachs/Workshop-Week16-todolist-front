@@ -11,6 +11,7 @@ model User {
     email    String     @unique
     password String
     Todolist Todolist[]
+    picture  String
 }
 
 model Todolist {
@@ -22,11 +23,13 @@ model Todolist {
 }
 
 model Task {
-    id         Int       @id @default(autoincrement())
-    title      String
-    done       Boolean
-    todolist   Todolist? @relation(fields: [todolistId], references: [id])
-    todolistId Int?
+    id          Int       @id @default(autoincrement())
+    title       String
+    done        Boolean
+    todolist    Todolist? @relation(fields: [todolistId], references: [id])
+    todolistId  Int?
+    description String?
+    picture     String?
 }
 
 generator client {

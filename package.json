@@ -20,5 +20,9 @@
 		"url": "https://github.com/lflachs/Workshop-Week16-todolist-front/issues"
 	},
 	"homepage": "https://github.com/lflachs/Workshop-Week16-todolist-front#readme",
-	"dependencies": {}
+	"dependencies": {
+		"multer": "^1.4.2",
+		"random-cat": "^1.0.1",
+		"react-toastify": "^7.0.3"
+	}
 }

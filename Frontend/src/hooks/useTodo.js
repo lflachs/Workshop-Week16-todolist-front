@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import useAsyncError from './useAsyncError';
+import { toast } from 'react-toastify';
 
 export default function useTodo() {
 	const [error, setError] = useState('');
@@ -37,6 +38,7 @@ export default function useTodo() {
 		// setTodolists([...todolists, newTodo]);
 		fetchApi(`/todolist`, 'POST', newTodo)
 			.then((todolist) => {
+				toast.success('🎉  Todolist created');
 				setTodolists([...todolists, todolist]);
 			})
 			.catch((err) => {
@@ -51,6 +53,7 @@ export default function useTodo() {
 				setTodolists((todolists) =>
 					todolists.filter((todolist) => deletedTodolist.id !== todolist.id)
 				);
+				toast.success('🎉  Todolist deleted');
 			})
 			.catch((err) => setError(err.message));
 	};
@@ -65,6 +68,7 @@ export default function useTodo() {
 						return todolist;
 					})
 				);
+				toast.success('🎉  Todolist updated');
 			})
 			.catch((err) => setError(err.message));
 	};

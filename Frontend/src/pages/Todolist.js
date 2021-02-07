@@ -3,9 +3,14 @@ import Footer from '../components/Footer';
 import { TextInputMain, Item } from '../components/Inputs';
 import { TrashIcon } from '../components/Icons';
 import useTodo from '../hooks/useTodo';
+import useCrud from '../hooks/useCrud';
+import { Link } from 'react-router-dom';
 
 export default function Todolist() {
-	const { error, onAdd, onDelete, onUpdate, todolists } = useTodo();
+	const [todolists, addTodo, updateTodo, deleteTodo, error] = useCrud(
+		'/api/todolist'
+	);
+	// const { error, onAdd, onDelete, onUpdate, todolists } = useTodo();
 	return (
 		<>
 			<h1>Welcome to your todolist</h1>
@@ -13,22 +18,23 @@ export default function Todolist() {
 			{todolists.map((todolist) => {
 				return (
 					<Item key={todolist.id}>
-						<TextInputMain
-							style={{ border: 'none', boxShadow: 'none' }}
-							initialValue={todolist.title}
-							onBlur={(event) => {
-								onUpdate(todolist.id, event.target.value);
-							}}
-						></TextInputMain>
+						<Link to={`/todolist/${todolist.id}`}>
+							<TextInputMain
+								style={{ border: 'none', boxShadow: 'none' }}
+								initialValue={todolist.title}
+								editable={false}
+								onClick={() => console.log('WIP')}
+							></TextInputMain>
+						</Link>
 						<TrashIcon
 							onClick={() => {
-								onDelete(todolist.id);
+								deleteTodo(todolist.id);
 							}}
 						/>
 					</Item>
 				);
 			})}
-			<Footer onClick={onAdd} />
+			<Footer onClick={() => addTodo({ title: 'hello, world' })} />
 		</>
 	);
 }
