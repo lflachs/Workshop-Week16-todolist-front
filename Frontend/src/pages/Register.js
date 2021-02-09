@@ -1,21 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { userContext } from '../context/userContext';
 
 export default function Register() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [repeatPassword, setRepeatPassword] = useState('');
-	const [error, setError] = useState('');
+	const { register, error } = useContext(userContext);
 	const handleRegister = (e) => {
-		setError('');
 		e.preventDefault();
-		if (repeatPassword !== password) {
-			setError('password should match');
-		}
-		fetch(`/api/auth/register`, {
-			method: 'POST',
-			headers: { 'content-type': 'application/json' },
-			body: JSON.stringify({ email, password }),
-		});
+		register({ email, password, repeatPassword });
 	};
 	return (
 		<div

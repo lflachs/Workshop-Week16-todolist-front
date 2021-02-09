@@ -16,10 +16,10 @@ exports.getCurrentUser = async (req, res, next) => {
 exports.updateCurrentUser = async (req, res, next) => {
 	try {
 		const { email, picture } = req.body;
-		console.log(req.file);
+		// console.log(req.file);
 		const updatedUser = await client.user.update({
 			where: { id: req.userId },
-			data: { email, picture: req.file.path },
+			data: { email, picture },
 			select: { id: true, email: true, picture: true },
 		});
 		res.status(200).json(updatedUser);

@@ -44,7 +44,14 @@ exports.login = async (req, res, next) => {
 		res
 			.status(200)
 			.cookie('token', token, { httpOnly: true })
-			.json({ token, userId: user.id });
+			.json({ email: user.email, id: user.id, picture: user.piture });
+	} catch (err) {
+		next(err);
+	}
+};
+exports.logout = async (req, res, next) => {
+	try {
+		res.status(200).clearCookie('token').json({ message: 'logout' });
 	} catch (err) {
 		next(err);
 	}
